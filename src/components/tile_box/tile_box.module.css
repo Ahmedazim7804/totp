@@ -1,0 +1,9 @@
+.base {
+    background-color: #181818;
+    /* width: 70vw; */
+    margin: 0px 64px;
+    height: calc(100vh - 110px);
+    border-radius: 0px 0px 16px 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}

@@ -1,0 +1,15 @@
+.letter {
+    display: flex;
+
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+
+    font-size: 2.25em;
+    background-color: #4f6f52;
+    color: whitesmoke;
+    font-weight: bold;
+
+    justify-content: center;
+    align-items: center;
+}

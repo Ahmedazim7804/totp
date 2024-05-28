@@ -1,0 +1,109 @@
+.overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.base {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+
+    background-color: #121212;
+
+    height: fit-content;
+    width: fit-content;
+    padding: 64px 32px;
+
+    border-radius: 20px;
+
+    display: grid;
+
+    grid-template-rows: repeat(4, 50px);
+    grid-template-columns: 0.1fr 1fr 1fr;
+
+    column-gap: 16px;
+
+    align-items: center;
+}
+
+.base input,
+select,
+input[type="number"] {
+    background-color: #121212;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+
+    /* width: min-content; */
+    height: max-content;
+    padding: 10px 10px;
+
+    grid-column: 2 / span 3;
+
+    font-size: 16px;
+}
+
+.algorithm {
+    grid-column: 2;
+}
+
+.base input[type="number"] {
+    grid-column: 3;
+}
+
+.base textarea {
+    background-color: #121212;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+
+    /* width: min-content; */
+    height: max-content;
+    padding: 0px 10px;
+
+    resize: none;
+
+    grid-column: 2 / span 3;
+
+    font-size: 16px;
+}
+
+.base input:focus,
+input[type="number"]:focus {
+    outline: none;
+}
+
+.base button {
+    position: fixed;
+    background-color: #285430;
+    border: 2px solid #285430;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    padding: 4px 0px;
+
+    color: whitesmoke;
+    font-weight: 600;
+    font-size: 1.2em;
+
+    bottom: 32px;
+    right: 16px;
+
+    width: 35%;
+}
+
+.base button:hover {
+    background-color: #5f8d4e;
+    border: 2px solid #5f8d4e;
+}

@@ -1,0 +1,9 @@
+.base {
+    width: calc(100vw - 128px);
+    height: 10px;
+    background-color: #5f8d4e;
+
+    border-radius: 8px 8px 0px 0px;
+    display: flex;
+    margin: 32px 64px 0px 64px;
+}
