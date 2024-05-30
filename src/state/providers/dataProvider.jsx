@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { DataContext } from "../contexts/dataContext";
 import PropTypes from "prop-types";
+import { Algorithms } from "../../utils/enum";
+import { TotpEntry } from "../../model/totp_entry.jsx";
 
 export function DataProvider({ children }) {
     const [data, setData] = useState([
-        {
-            name: "Google",
-            website: "https://www.google.com",
-            totpSecret: "JQGRGWQTITHOJMGR",
-        },
+        new TotpEntry(
+            "Google",
+            "https://www.google.com",
+            "JQGRGWQTITHOJMGR",
+            Algorithms.SHA1,
+            6
+        ),
     ]);
 
     function addData(totpData) {

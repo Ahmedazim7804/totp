@@ -8,28 +8,36 @@ import { MdOutlineWeb } from "react-icons/md";
 import { FaKey } from "react-icons/fa6";
 import { CiCircleInfo } from "react-icons/ci";
 import { DataContext } from "../../state/contexts/dataContext";
+import { IoMdTime } from "react-icons/io";
+import { Algorithms } from "../../utils/enum";
+import { TotpEntry } from "../../model/totp_entry";
 
 export function AddDialog() {
     const dialogContext = useContext(DialogContext);
     const dataContext = useContext(DataContext);
 
-    const [name, setName] = useState("Twitter");
-    const [website, setWebsite] = useState("https://twitter.com");
-    const [secret, setSecret] = useState("215436");
+    const [name, setName] = useState("");
+    const [website, setWebsite] = useState("");
+    const [secret, setSecret] = useState("");
+    const [algo, setAlgo] = useState(Algorithms.SHA1);
+    const [digits, setDigits] = useState(6);
 
-    function addToDatabase() {
+    function addToDatabase(event) {
+        event.preventDefault();
+
         if (name === "" || website === "" || secret === "") {
             return;
         }
-        dataContext.addData({
-            name: name,
-            website: website,
-            totpSecret: secret,
-        });
+
+        const entry = new TotpEntry(name, website, secret, algo, digits);
+
+        dataContext.addData(entry);
 
         setName("");
         setWebsite("");
         setSecret("");
+        setAlgo(Algorithms.SHA1);
+        setDigits(6);
 
         dialogContext.toggleDialog();
     }
@@ -45,7 +53,8 @@ export function AddDialog() {
                     }
                 }}
             >
-                <div className={style.base}>
+                <form className={style.base} onSubmit={addToDatabase}>
+                    <p className={style.title}>Add new entry</p>
                     <IconContext.Provider
                         value={{
                             color: "whitesmoke",
@@ -53,41 +62,91 @@ export function AddDialog() {
                         }}
                     >
                         <FaUser />
-                        <input
-                            placeholder="Name"
-                            id="inputName"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        ></input>
+                        <div className={style.field_holder}>
+                            <input
+                                id="inputName"
+                                value={name}
+                                required
+                                onChange={(e) => setName(e.target.value)}
+                            ></input>
+                            <label htmlFor="inputName">Name</label>
+                        </div>
+
                         <MdOutlineWeb />
-                        <input
-                            placeholder="Website/App"
-                            id="websiteInput"
-                            value={website}
-                            onChange={(e) => setWebsite(e.target.value)}
-                        ></input>
+                        <div className={style.field_holder}>
+                            <input
+                                // placeholder="Website/App"
+                                id="websiteInput"
+                                required
+                                value={website}
+                                onChange={(e) => setWebsite(e.target.value)}
+                            ></input>
+                            <label htmlFor="websiteInput">Website</label>
+                        </div>
+
                         <FaKey />
-                        <input
-                            placeholder="Secret"
-                            value={secret}
-                            type="password"
-                            onChange={(e) => setSecret(e.target.value)}
-                        ></input>
+                        <div className={style.field_holder}>
+                            <input
+                                id="secretInput"
+                                value={secret}
+                                required
+                                type="text"
+                                onChange={(e) => setSecret(e.target.value)}
+                            ></input>
+                            <label htmlFor="secretInput">Secret</label>
+                        </div>
 
                         <CiCircleInfo />
-                        <select className={style.algorithm}>
-                            <option value="SHA-1">SHA-1</option>
-                            <option value="SHA-256">SHA-256</option>
-                            <option value="SHA-512">SHA-512</option>
-                        </select>
+                        <div className={style.field_holder}>
+                            <select
+                                id="selectAlgorithm"
+                                className={style.algorithm}
+                                value={algo}
+                                onChange={(e) => setAlgo(e.target.value)}
+                                style={{
+                                    width: "100%",
+                                }}
+                            >
+                                <option value={Algorithms.SHA1}>
+                                    {Algorithms.SHA1}
+                                </option>
+                                <option value={Algorithms.SHA256}>
+                                    {Algorithms.SHA256}
+                                </option>
+                                <option value={Algorithms.SHA512}>
+                                    {Algorithms.SHA512}
+                                </option>
+                            </select>
+                            <label
+                                id="selectAlgorithmLabel"
+                                htmlFor="selectAlgorithm"
+                                style={{
+                                    top: "-10px",
+                                    fontSize: "0.75em",
+                                }}
+                            >
+                                Algorithm
+                            </label>
+                        </div>
 
-                        <input type="number" className={style.digits}></input>
+                        <IoMdTime />
+                        <div className={style.field_holder}>
+                            <input
+                                id="digitsInput"
+                                type="number"
+                                value={digits}
+                                onChange={(e) => setDigits(e.target.value)}
+                                className={style.digits}
+                            ></input>
+                            <label htmlFor="digitsInput">Digits</label>
+                        </div>
 
-                        <button onClick={addToDatabase}>
+                        <input type="submit" value="Save"></input>
+                        {/* <button onClick={addToDatabase}>
                             <p>Save</p>
-                        </button>
+                        </button> */}
                     </IconContext.Provider>
-                </div>
+                </form>
             </div>
         </dialog>
     );

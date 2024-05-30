@@ -1,0 +1,138 @@
+.base {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 8px;
+
+    height: fit-content;
+
+    /* width: max(400px, 30vw); */
+    /* max-width: max(400px, 30vw); */
+    width: fit-content;
+    padding: 64px 64px 64px 64px;
+
+    background-color: #181818;
+
+    display: flex;
+    flex-direction: column;
+
+    /* justify-content: center; */
+    align-items: center;
+
+    row-gap: 8px;
+}
+
+.title {
+    font-size: 1.75em;
+    color: whitesmoke;
+    /* margin-bottom: 16px; */
+}
+
+.base p:nth-child(2) {
+    color: whitesmoke;
+    font-size: 1em;
+}
+
+.errorMessage {
+    color: red;
+    margin-bottom: -10px;
+}
+
+.toggle {
+    color: #a4be7b;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.solid {
+    margin: 16px 0px;
+    width: 80%;
+    border-top: 1px solid #a4be7b;
+}
+
+.inputRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 24px 0px;
+}
+
+.inputEmail,
+.inputEmail:focus,
+.inputPassword,
+.inputPassword:focus {
+    background-color: #121212;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+
+    width: min(25vw, 300px);
+
+    padding: 10px 10px;
+    border: 0px;
+    border-bottom: 2px solid whitesmoke;
+    outline: none;
+    font-size: 16px;
+
+    grid-column: 2;
+}
+
+.field_holder {
+    position: relative;
+}
+
+.field_holder label {
+    position: absolute;
+
+    transform: translateY(50%);
+    left: calc(8px);
+    color: whitesmoke;
+    background-color: transparent;
+    font-size: 1em;
+    margin: 0px 0px;
+    transition: 0.2s ease-in-out;
+}
+
+.base input:focus + label,
+.base input:valid + label {
+    font-size: 0.8em;
+    transform: translateY(-100%);
+    transition: 0.2s ease-in-out;
+}
+
+.base input[type="submit"] {
+    background-color: #285430;
+    border: 2px solid #285430;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    padding: 4px 0px;
+
+    grid-column: 2;
+
+    color: whitesmoke;
+    font-weight: 600;
+}
+
+.base input[type="submit"]:hover {
+    background-color: #5f8d4e;
+    border: 2px solid #5f8d4e;
+}
+
+.base form {
+    display: grid;
+
+    justify-content: center;
+    align-items: center;
+
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: 1.5em 1fr;
+
+    column-gap: 8px;
+    row-gap: 24px;
+}
