@@ -20,16 +20,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: whitesmoke;
+    background-color: #e5d9b6;
     border-radius: 20px;
-    height: 2.5vh;
+    height: 3.5vh;
     padding: 4px;
 }
 
 .searchInput {
-    background-color: whitesmoke;
+    background-color: #e5d9b6;
     border: 0px;
     font-family: "Lexend", sans-serif;
+    font-size: 1em;
     padding-left: 4px;
     outline: none;
 }

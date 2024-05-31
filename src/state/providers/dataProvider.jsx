@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { DataContext } from "../contexts/dataContext";
 import PropTypes from "prop-types";
 import { Algorithms } from "../../utils/enum";
@@ -9,7 +9,37 @@ import { supabase } from "../../services/supabase.jsx";
 export function DataProvider({ children }) {
     const authContext = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
+    const backupData = useRef([]);
     const [totpData, setTotpData] = useState([]);
+    const [filter, setFilter] = useState("");
+
+    useEffect(() => {
+        console.log(filter);
+        if (!filter) {
+            setTotpData(backupData.current);
+            return;
+        }
+
+        setTotpData(
+            backupData.current.filter((entry) => {
+                if (entry.name.toLowerCase().includes(filter.toLowerCase())) {
+                    return true;
+                }
+
+                if (
+                    entry.website.toLowerCase().includes(filter.toLowerCase())
+                ) {
+                    return true;
+                }
+
+                return false;
+            })
+        );
+    }, [filter]);
+
+    useEffect(() => {
+        getData();
+    }, [authContext]);
 
     async function getData() {
         const user = await supabase.auth.getUser();
@@ -21,14 +51,11 @@ export function DataProvider({ children }) {
 
         if (data != null) {
             setTotpData(data);
+            backupData.current = data;
         }
 
         setLoading(false);
     }
-
-    useEffect(() => {
-        getData();
-    }, [authContext]);
 
     async function addData(entry) {
         const { data, error } = await supabase
@@ -72,6 +99,7 @@ export function DataProvider({ children }) {
                 loading,
                 addData,
                 deleteEntry,
+                setFilter,
             }}
         >
             {children}
@@ -80,6 +108,6 @@ export function DataProvider({ children }) {
 }
 
 DataProvider.propTypes = {
-    // children: PropTypes.arrayOf(PropTypes.element).isRequired,
-    children: PropTypes.element.isRequired,
+    children: PropTypes.arrayOf(PropTypes.element).isRequired,
+    // children: PropTypes.element.isRequired,
 };

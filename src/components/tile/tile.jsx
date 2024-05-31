@@ -4,11 +4,11 @@ import { IconContext } from "react-icons";
 import { FaClipboard } from "react-icons/fa";
 import { TileIcon } from "./tile_icon.jsx";
 import PropTypes from "prop-types";
-import { ToastContainer, toast } from "react-toastify";
 import { TOTP } from "totp-generator";
 import { DialogContext } from "../../state/contexts/dialogContext.jsx";
 import { IoMdRemove } from "react-icons/io";
 import { DeleteDialogContext } from "../../state/contexts/deleteDialogContext.jsx";
+import { toast } from "react-hot-toast";
 
 export const Tile = ({ tile }) => {
     const dialogContext = useContext(DialogContext);
@@ -42,11 +42,13 @@ export const Tile = ({ tile }) => {
 
     async function copyToClipboard() {
         await navigator.clipboard.writeText(totp.otp);
-        toast("🦄 Wow so easy!", {
-            position: "top-right",
-            autoClose: 1000,
-            draggable: false,
-            theme: "colored",
+        toast.success("Copied to clipboard", {
+            style: {
+                borderRadius: "10px",
+                background: "#121212",
+                color: "white",
+            },
+            position: "top-center",
         });
     }
 

@@ -54,3 +54,15 @@
         transform: rotate(360deg);
     }
 }
+
+.noDataText {
+    position: absolute;
+    align-self: center;
+    justify-self: center;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
+
+    color: gray;
+    font-size: 1.5rem;
+}

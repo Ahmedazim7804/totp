@@ -6,23 +6,27 @@ import { DataContext } from "../../state/contexts/dataContext.jsx";
 import PropTypes from "prop-types";
 import { DeleteDialog } from "../deleteDialog/deleteDialog.jsx";
 import { DeleteDialogProvider } from "../../state/providers/deleteDialogProvider.jsx";
+import { Toaster } from "react-hot-toast";
 
 export const TileBox = () => {
     const dataContext = useContext(DataContext);
 
     return (
-        <DeleteDialogProvider>
-            <div className={style.base}>
-                {dataContext.loading ? (
-                    <Loading></Loading>
-                ) : (
-                    <TileBoxContent
-                        data={dataContext.totpData}
-                    ></TileBoxContent>
-                )}
-                <DeleteDialog></DeleteDialog>
-            </div>
-        </DeleteDialogProvider>
+        <div>
+            <Toaster></Toaster>
+            <DeleteDialogProvider>
+                <div className={style.base}>
+                    {dataContext.loading ? (
+                        <Loading></Loading>
+                    ) : (
+                        <TileBoxContent
+                            data={dataContext.totpData}
+                        ></TileBoxContent>
+                    )}
+                    <DeleteDialog></DeleteDialog>
+                </div>
+            </DeleteDialogProvider>
+        </div>
     );
 };
 
@@ -41,7 +45,7 @@ function TileBoxContent({ data }) {
             return <Tile key={tile.created_at} tile={tile} />;
         })
     ) : (
-        <p>No data</p>
+        <p className={style.noDataText}>So lonely here, try adding some data</p>
     );
 }
 
