@@ -14,7 +14,6 @@ export function DataProvider({ children }) {
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
-        console.log(filter);
         if (!filter) {
             setTotpData(backupData.current);
             return;
@@ -40,6 +39,12 @@ export function DataProvider({ children }) {
     useEffect(() => {
         getData();
     }, [authContext]);
+
+    function signOut() {
+        setTotpData([]);
+        backupData.current = [];
+        setFilter("");
+    }
 
     async function getData() {
         const user = await supabase.auth.getUser();
@@ -100,6 +105,7 @@ export function DataProvider({ children }) {
                 addData,
                 deleteEntry,
                 setFilter,
+                signOut,
             }}
         >
             {children}

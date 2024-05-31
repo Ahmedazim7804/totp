@@ -4,9 +4,23 @@ import { FaSearch } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 import { IconContext } from "react-icons";
 import { DataContext } from "../../state/contexts/dataContext";
+import { supabase } from "../../services/supabase.jsx";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
     const dataContext = useContext(DataContext);
+    const navigate = useNavigate();
+
+    async function signOut() {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+            console.error("Error logging out:", error.message);
+            return;
+        }
+
+        dataContext.signOut();
+        navigate("/auth");
+    }
 
     return (
         <div className={style.navbar}>
@@ -28,12 +42,11 @@ export const Navbar = () => {
                     value={{
                         color: "white",
                         size: "1.5em",
-                        style: {
-                            paddingLeft: "32px",
-                        },
                     }}
                 >
-                    <MdLogout />
+                    <div className={style.logout} onClick={signOut}>
+                        <MdLogout />
+                    </div>
                 </IconContext.Provider>
             </div>
         </div>
