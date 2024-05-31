@@ -1,29 +1,77 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { DataContext } from "../contexts/dataContext";
 import PropTypes from "prop-types";
 import { Algorithms } from "../../utils/enum";
 import { TotpEntry } from "../../model/totp_entry.jsx";
+import { AuthContext } from "../contexts/authContext.jsx";
+import { supabase } from "../../services/supabase.jsx";
 
 export function DataProvider({ children }) {
-    const [data, setData] = useState([
-        new TotpEntry(
-            "Google",
-            "https://www.google.com",
-            "JQGRGWQTITHOJMGR",
-            Algorithms.SHA1,
-            6
-        ),
-    ]);
+    const authContext = useContext(AuthContext);
+    const [loading, setLoading] = useState(true);
+    const [totpData, setTotpData] = useState([]);
 
-    function addData(totpData) {
-        setData([...data, totpData]);
+    async function getData() {
+        const user = await supabase.auth.getUser();
+
+        let { data, error } = await supabase
+            .from("Data")
+            .select("*")
+            .eq("userId", user.data.user.id);
+
+        if (data != null) {
+            setTotpData(data);
+        }
+
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        getData();
+    }, [authContext]);
+
+    async function addData(entry) {
+        const { data, error } = await supabase
+            .from("Data")
+            .insert([
+                {
+                    name: entry.name,
+                    website: entry.website,
+                    secret: entry.totpSecret,
+                    algorithm: entry.algorithm,
+                    digits: entry.digits,
+                },
+            ])
+            .select();
+
+        if (error) {
+            console.log(error);
+            return;
+        } else {
+            getData();
+        }
+    }
+
+    async function deleteEntry(id) {
+        const { error } = await supabase.from("Data").delete().eq("id", id);
+
+        setTotpData(totpData.filter((entry) => entry.id !== id));
+
+        if (error) {
+            console.log(error);
+            return;
+        } else {
+            getData();
+        }
     }
 
     return (
         <DataContext.Provider
             value={{
-                data,
+                totpData,
+                loading,
                 addData,
+                deleteEntry,
             }}
         >
             {children}
@@ -32,5 +80,6 @@ export function DataProvider({ children }) {
 }
 
 DataProvider.propTypes = {
-    children: PropTypes.arrayOf(PropTypes.element).isRequired,
+    // children: PropTypes.arrayOf(PropTypes.element).isRequired,
+    children: PropTypes.element.isRequired,
 };

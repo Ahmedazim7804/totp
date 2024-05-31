@@ -5,7 +5,7 @@
     border-radius: 12px;
 
     display: grid;
-    width: 500px;
+    min-width: 450px;
     grid-template-columns: 0.1fr 1fr 1fr 1fr;
     justify-content: center;
     align-items: center;
@@ -61,9 +61,37 @@
     padding: 8px 8px;
     background-color: #5f8d4e;
     border-radius: 50%;
+    color: whitesmoke;
 }
 
 .icons:hover {
     background-color: #a4be7b;
     cursor: pointer;
+}
+
+.deleteIcon {
+    grid-row: 1;
+    position: relative;
+    top: -2em;
+    right: -1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f22a2a;
+    color: whitesmoke;
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+
+    cursor: pointer;
+}
+
+.deleteIcon:hover {
+    background-color: #f68181;
+}
+
+.deleteIcon p {
+    font-size: 1em;
+    font-weight: bold;
+    user-select: none;
 }

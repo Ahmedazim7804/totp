@@ -15,6 +15,7 @@ function useAuthProvider() {
 
     return {
         signOut,
+        setUserId,
         userId,
     };
 }

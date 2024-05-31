@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import style from "./addDialog.module.css";
 import { DialogContext } from "../../state/contexts/dialogContext";
@@ -29,15 +29,9 @@ export function AddDialog() {
             return;
         }
 
-        const entry = new TotpEntry(name, website, secret, algo, digits);
+        const newEntry = new TotpEntry(name, website, secret, algo, digits);
 
-        dataContext.addData(entry);
-
-        setName("");
-        setWebsite("");
-        setSecret("");
-        setAlgo(Algorithms.SHA1);
-        setDigits(6);
+        dataContext.addData(newEntry);
 
         dialogContext.toggleDialog();
     }
@@ -151,3 +145,7 @@ export function AddDialog() {
         </dialog>
     );
 }
+
+AddDialog.propTypes = {
+    entry: PropTypes.object,
+};

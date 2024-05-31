@@ -9,9 +9,12 @@
 
     height: fit-content;
 
-    /* width: max(400px, 30vw); */
-    /* max-width: max(400px, 30vw); */
-    width: fit-content;
+    width: max(300px, 20vw);
+    max-width: max(300px, 20vw);
+    min-width: max(300px, 20vw);
+    height: max(300px, 20vw);
+    max-height: max(300px, 20vw);
+    min-height: max(300px, 20vw);
     padding: 64px 64px 64px 64px;
 
     background-color: #181818;
@@ -19,7 +22,7 @@
     display: flex;
     flex-direction: column;
 
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
 
     row-gap: 8px;
@@ -135,4 +138,76 @@
 
     column-gap: 8px;
     row-gap: 24px;
+}
+
+/* EMAIL VERIFY PAGE */
+
+.verifyBase {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 16px;
+
+    height: fit-content;
+
+    width: max(300px, 20vw);
+    max-width: max(300px, 20vw);
+    min-width: max(300px, 20vw);
+    height: max(300px, 20vw);
+    max-height: max(300px, 20vw);
+    min-height: max(300px, 20vw);
+    /* width: fit-content; */
+
+    background-color: #181818;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    row-gap: 8px;
+}
+
+.emailBanner {
+    background-color: #285430;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 16px 0px;
+}
+
+.verifyBase p {
+    color: whitesmoke;
+    font-size: 1em;
+    padding: 0px 16px;
+    text-align: center;
+}
+
+.verifyBase button {
+    background-color: #285430;
+    border: 2px solid #285430;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    padding: 4px 8px;
+
+    color: whitesmoke;
+    font-weight: 600;
+
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
+.verifyBase button:hover {
+    background-color: #5f8d4e;
+    border: 2px solid #5f8d4e;
 }

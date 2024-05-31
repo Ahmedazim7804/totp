@@ -6,15 +6,32 @@ import { AddDialog } from "../components/addDialog/addDialog.jsx";
 import { DialogProvider } from "../state/providers/dialogProvider.jsx";
 import { DataProvider } from "../state/providers/dataProvider.jsx";
 import { Timer } from "../components/timer/timer.jsx";
+import { ToastContainer, toast } from "react-toastify";
 
 const App = () => {
     return (
         <div>
             <Navbar></Navbar>
+            <div
+                style={{
+                    position: "fixed",
+                    width: "100%",
+                    backgroundColor: "red",
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "flex-end",
+                }}
+            >
+                <ToastContainer
+                    style={{
+                        backgroundColor: "green",
+                    }}
+                ></ToastContainer>
+            </div>
             <Timer></Timer>
             <DataProvider>
-                <TileBox></TileBox>
                 <DialogProvider>
+                    <TileBox></TileBox>
                     <Fab></Fab>
                     <AddDialog></AddDialog>
                 </DialogProvider>
