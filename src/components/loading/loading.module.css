@@ -1,0 +1,24 @@
+.loading {
+    align-self: center;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1 / span 3;
+
+    display: flex;
+}
+
+.loading p {
+    color: whitesmoke;
+    font-size: 1.5rem;
+    margin-right: 8px;
+}
+
+.loader {
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #5f8d4e; /* Blue */
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 2s linear infinite;
+}

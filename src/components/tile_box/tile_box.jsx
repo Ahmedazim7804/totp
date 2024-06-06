@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { DeleteDialog } from "../deleteDialog/deleteDialog.jsx";
 import { DeleteDialogProvider } from "../../state/providers/deleteDialogProvider.jsx";
 import { Toaster } from "react-hot-toast";
+import { Loading } from "../loading/loading.jsx";
 
 export const TileBox = () => {
     const dataContext = useContext(DataContext);
@@ -29,15 +30,6 @@ export const TileBox = () => {
         </div>
     );
 };
-
-function Loading() {
-    return (
-        <div className={style.loading}>
-            <p>Loading...</p>
-            <div className={style.loader}></div>
-        </div>
-    );
-}
 
 function TileBoxContent({ data }) {
     return data.length !== 0 ? (

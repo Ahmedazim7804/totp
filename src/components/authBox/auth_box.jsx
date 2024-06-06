@@ -73,7 +73,9 @@ export function AuthBox() {
 
         authContext.setUserId(data.user.id);
 
-        navigate("/app");
+        navigate("/app", {
+            state: { userId: data.user.id },
+        });
     }
 
     function getButtonText() {
