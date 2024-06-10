@@ -17,13 +17,15 @@ export const TileBox = () => {
             <Toaster></Toaster>
             <DeleteDialogProvider>
                 <div className={style.base}>
-                    {dataContext.loading ? (
-                        <Loading></Loading>
-                    ) : (
-                        <TileBoxContent
-                            data={dataContext.totpData}
-                        ></TileBoxContent>
-                    )}
+                    <div className={style.layout}>
+                        {dataContext.loading ? (
+                            <Loading></Loading>
+                        ) : (
+                            <TileBoxContent
+                                data={dataContext.totpData}
+                            ></TileBoxContent>
+                        )}
+                    </div>
                     <DeleteDialog></DeleteDialog>
                 </div>
             </DeleteDialogProvider>
